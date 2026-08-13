@@ -1,8 +1,8 @@
 /* =============================================
    SCROLL ILLUSION — Hero Text Animation
    Complete rework: Uses GSAP ScrollTrigger.
-   Phase 1: "Im Karthikeyan" + UI scatter outward
-   Phase 2: "PSYCLOX" + "SECURITY" + "ENGINEER" +
+   Phase 1: "Im Saad Madni" + UI scatter outward
+   Phase 2: "SAAD MADNI" + "SECURITY" + "ENGINEER" +
             "ETHICAL HACKER" assemble center-screen
    Phase 3: Color shift to red
    Phase 4: Nav-logo appears
@@ -39,10 +39,10 @@ function initScrollIllusion() {
 
     // New structure: morph targets at section level
     const morphLayer = document.querySelector('.hero-morph-layer');
-    const psycloxTitle = document.querySelector('.hero-title-psyclox');
+    const saadmadniTitle = document.querySelector('.hero-title-saadmadni');
     const landingWords = document.querySelectorAll('.hero-landing-word');
 
-    if (!heroName || !navLogo || !heroSection || !titleLine || !psycloxTitle || !morphLayer) return;
+    if (!heroName || !navLogo || !heroSection || !titleLine || !saadmadniTitle || !morphLayer) return;
 
     // --- Split text into individual characters for animation ---
     function splitToChars(element) {
@@ -68,13 +68,13 @@ function initScrollIllusion() {
         return chars;
     }
 
-    // Split "Im" and "Karthikeyan" into chars
+    // Split "Im" and "Saad Madni" into chars
     const nameChars = splitToChars(heroName);
     const lineChars = splitToChars(titleLine);
     const heroChars = [...lineChars, ...nameChars];
 
-    // Split "PSYCLOX" into chars
-    const psycloxChars = splitToChars(psycloxTitle);
+    // Split "SAAD MADNI" into chars
+    const saadmadniChars = splitToChars(saadmadniTitle);
 
     // Split each landing word into chars
     const landingWordChars = [];
@@ -86,10 +86,10 @@ function initScrollIllusion() {
     gsap.set(navLogo, { autoAlpha: 0 });
     gsap.set(morphLayer, { opacity: 1 });
 
-    // Pre-scatter all morph target chars (PSYCLOX + landing words) invisibly
+    // Pre-scatter all morph target chars (SAAD MADNI + landing words) invisibly
     const random = (min, max) => Math.random() * (max - min) + min;
 
-    psycloxChars.forEach(char => {
+    saadmadniChars.forEach(char => {
         gsap.set(char, {
             x: random(-800, 800),
             y: random(-500, 500),
@@ -136,7 +136,7 @@ function initScrollIllusion() {
         // PHASE 1 (0 → 0.25): Scatter everything
         // ═══════════════════════════════════════
 
-        // "Im Karthikeyan" explodes outward
+        // "Im Saad Madni" explodes outward
         tl.fromTo(heroChars,
             { x: 0, y: 0, rotationZ: 0, scale: 1, autoAlpha: 1 },
             {
@@ -173,10 +173,10 @@ function initScrollIllusion() {
             }, 0);
 
         // ═══════════════════════════════════════════
-        // PHASE 2 (0.15 → 0.5): PSYCLOX assembles
+        // PHASE 2 (0.15 → 0.5): SAAD MADNI assembles
         // ═══════════════════════════════════════════
 
-        tl.to(psycloxChars, {
+        tl.to(saadmadniChars, {
             x: 0,
             y: 0,
             rotationZ: 0,
@@ -187,9 +187,9 @@ function initScrollIllusion() {
             stagger: 0.01
         }, 0.15);
 
-        // ═══════════════════════════════════════════════
+        // ═══════════════════════════════════════════
         // PHASE 2.5 (0.25 → 0.55): Landing words assemble
-        // ═══════════════════════════════════════════════
+        // ═══════════════════════════════════════════
 
         landingWordChars.forEach((wordChars, wordIndex) => {
             tl.to(wordChars, {
@@ -205,10 +205,10 @@ function initScrollIllusion() {
         });
 
         // ═══════════════════════════════════════════
-        // PHASE 3 (0.55 → 0.7): PSYCLOX glows brighter (stays white as identity)
+        // PHASE 3 (0.55 → 0.7): SAAD MADNI glows brighter (stays white as identity)
         // ═══════════════════════════════════════════
 
-        tl.to(psycloxTitle, {
+        tl.to(saadmadniTitle, {
             textShadow: '0 0 60px rgba(255, 255, 255, 0.6), 0 0 120px rgba(255, 71, 87, 0.3)',
             duration: 0.15,
             ease: "power2.inOut"

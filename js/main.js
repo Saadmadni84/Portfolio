@@ -1,6 +1,8 @@
-/* ========================================
-   PSYCLOX PORTFOLIO - MAIN JAVASCRIPT
-   ======================================== */
+/* =============================================
+   SAAD MADNI PORTFOLIO - MAIN JAVASCRIPT
+   Modern Animations, Terminal, Audio, Matrix, 
+   Glitch Effects, Interactive Showcase & 3D Elements
+   ============================================= */
 
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,51 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initLoader() {
     const loader = document.getElementById('loader');
-    const loaderVideo = document.getElementById('loader-video');
-
-    if (!loader) return;
-
-    // Prevent scrolling while loading
-    document.body.classList.add('page-loading');
-
-    // Function to hide loader with brutal glitch exit
-    const finishLoading = () => {
-        loader.classList.add('loader-glitch-out');
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            document.body.classList.remove('loading');
-            document.body.classList.remove('page-loading');
-            document.body.classList.add('page-loaded');
-
-            // Dispatch event for other animations (like hero 3D) to know loading is done
-            window.dispatchEvent(new Event('loaderFinished'));
-        }, 800); // Wait for CSS glitch out animation to finish
-    };
-
-    // COMMENTED OUT FOR TESTING: Check if already loaded from cache quickly
-    /*
-    if (sessionStorage.getItem('hasLoadedBefore')) {
+    if (loader) {
         loader.style.display = 'none';
-        document.body.classList.remove('page-loading');
-        document.body.classList.add('page-loaded');
-
-        // Ensure other scripts know we are done
-        setTimeout(() => window.dispatchEvent(new Event('loaderFinished')), 50);
-        return;
     }
-    sessionStorage.setItem('hasLoadedBefore', 'true');
-    */
-
-    if (loaderVideo) {
-        // Ensure video plays
-        loaderVideo.play().catch(e => console.log('Autoplay prevented:', e));
-
-        // Wait for video to end or fallback timeout
-        loaderVideo.addEventListener('ended', finishLoading);
-        setTimeout(finishLoading, 4000); // Fallback if video is longer or fails
-    } else {
-        setTimeout(finishLoading, 2500);
-    }
+    document.body.classList.remove('loading', 'page-loading');
+    document.body.classList.add('page-loaded');
+    window.dispatchEvent(new Event('loaderFinished'));
 }
 
 /* ========================================
@@ -674,7 +637,11 @@ function initTypewriter() {
     if (!typewriter) return;
 
     // Roles to cycle through
-    const roles = ['Purple Teamer', 'Cybersecurity Analyst', 'Penetration Tester'];
+    const roles = [
+        'AI/ML Engineer × Backend Engineer',
+        'AI/ML Engineer × Backend Engineer × Cybersecurity Enthusiast',
+        'Intelligent Systems & Scalable Backends'
+    ];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -761,7 +728,7 @@ function initCardTextCyclers() {
     if (brandElement) {
         // Ensure starting text is empty before first type
         brandElement.textContent = '';
-        runTypewriter(brandElement, ['PSYCLOX', 'KARTHIKEYAN'], 120, 60, 5000);
+        runTypewriter(brandElement, ['SAAD MADNI'], 120, 60, 5000);
     }
 
     // Initialize Phrase Typewriter
@@ -770,7 +737,6 @@ function initCardTextCyclers() {
         runTypewriter(phraseElement, [
             'Move Your Cursor',
             'Explore Everyday',
-            'click NEW for updated portfolio',
             'Break The Matrix',
             'Find The Limits',
             'Think Outside The Box'
@@ -1104,91 +1070,73 @@ function animateCounter(element, target) {
 /* ========================================
    CONTACT FORM
    ======================================== */
-
-
-
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', async function (e) {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // New cyber button elements
-        const submitBtn = form.querySelector('.cyber-btn');
-        const btnText = submitBtn.querySelector('.btn-glitch-text');
-        const btnProgress = submitBtn.querySelector('.btn-progress');
+        const nameInput = form.querySelector('#name');
+        const emailInput = form.querySelector('#email');
+        const messageInput = form.querySelector('#message');
 
-        const originalText = btnText.textContent;
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const message = messageInput ? messageInput.value.trim() : '';
 
-        // Visual Feedback - Loading
-        btnText.textContent = 'TRANSMISSION_INITIATED...';
-        submitBtn.style.borderColor = '#fbbf24'; // Warning yellow
-        btnText.style.boxShadow = '0 0 15px rgba(251, 191, 36, 0.3)';
-        btnText.style.color = '#fbbf24';
-        submitBtn.disabled = true;
-
-        // Progress bar simulation
-        btnProgress.style.width = '30%';
-
-        // Prepare FormData for Web3Forms
-        const formData = new FormData(form);
-        formData.append("access_key", "72a66426-c1f4-4e58-af6f-c3b77c514450");
-
-        try {
-            // Simulated progress
-            setTimeout(() => btnProgress.style.width = '70%', 500);
-
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Success State
-                btnProgress.style.width = '100%';
-                btnText.textContent = 'TRANSMISSION_COMPLETE';
-                submitBtn.style.borderColor = '#4ade80'; // Success green
-                btnText.style.color = '#4ade80';
-                submitBtn.style.boxShadow = '0 0 20px rgba(74, 222, 128, 0.4)';
-
-                // Alert as requested
-                alert("Success! Your message has been sent.");
-                form.reset();
-
-                // Reset button after delay
-                setTimeout(() => {
-                    btnText.textContent = originalText;
-                    submitBtn.style.borderColor = '';
-                    submitBtn.style.boxShadow = '';
-                    btnText.style.color = '';
-                    btnProgress.style.width = '0';
-                    submitBtn.disabled = false;
-                }, 5000);
-
-            } else {
-                throw new Error(data.message);
-            }
-
-        } catch (error) {
-            console.error("Web3Forms Error:", error);
-            // Error State
-            btnText.textContent = 'TRANSMISSION_FAILED';
-            submitBtn.style.borderColor = '#ff3333'; // Error red
-            btnText.style.color = '#ff3333';
-
-            alert("Error: " + error.message);
-
-            setTimeout(() => {
-                btnText.textContent = originalText;
-                submitBtn.style.borderColor = '';
-                btnText.style.color = '';
-                btnProgress.style.width = '0';
-                submitBtn.disabled = false;
-            }, 3000);
+        // Validation
+        if (!name || !email || !message) {
+            alert('Please fill out all required fields.');
+            return;
         }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // Cyber button feedback
+        const submitBtn = form.querySelector('.cyber-btn');
+        const btnText = submitBtn ? submitBtn.querySelector('.btn-glitch-text') : null;
+        const btnProgress = submitBtn ? submitBtn.querySelector('.btn-progress') : null;
+
+        const originalText = btnText ? btnText.textContent : 'SEND MESSAGE';
+
+        if (btnText) {
+            btnText.textContent = 'OPENING EMAIL CLIENT...';
+            btnText.style.color = '#4ade80';
+        }
+        if (submitBtn) {
+            submitBtn.style.borderColor = '#4ade80';
+        }
+        if (btnProgress) {
+            btnProgress.style.width = '100%';
+        }
+
+        // Construct mailto URL
+        const subject = `Portfolio Contact — ${name}`;
+        const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+        const mailtoUrl = `mailto:saadmadni84@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Trigger default email client
+        window.location.href = mailtoUrl;
+
+        // Reset button state after a short delay
+        setTimeout(() => {
+            if (btnText) {
+                btnText.textContent = originalText;
+                btnText.style.color = '';
+            }
+            if (submitBtn) {
+                submitBtn.style.borderColor = '';
+            }
+            if (btnProgress) {
+                btnProgress.style.width = '0';
+            }
+        }, 4000);
     });
 
     // Input animations - Cyber Focus
@@ -1396,9 +1344,9 @@ window.addEventListener('load', () => {
    CONSOLE EASTER EGG
    ======================================== */
 
-console.log('%c🔐 Psyclox Portfolio', 'font-size: 24px; font-weight: bold; color: #ff6b6b;');
+console.log('%c🔐 Saad Madni Portfolio', 'font-size: 24px; font-weight: bold; color: #ff6b6b;');
 console.log('%cWelcome, fellow hacker! 👋', 'font-size: 14px; color: #667eea;');
-console.log('%cInterested in security? Let\'s connect: linkedin.com/in/karthikeyaneh', 'font-size: 12px; color: #888;');
+console.log('%cInterested in security? Let\'s connect: linkedin.com/in/saadmadni', 'font-size: 12px; color: #888;');
 
 /* ========================================
    FIX: OSCP LOCKED STYLE FORCE OVERRIDE

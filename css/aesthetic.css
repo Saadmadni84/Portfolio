@@ -607,37 +607,22 @@
     gap: 12px;
 }
 
-.loader-psyclox {
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 0.4em;
-    font-family: 'Space Grotesk', sans-serif;
+.loader-saadmadni {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    letter-spacing: 6px;
+    color: #ffffff;
     position: relative;
-    text-transform: uppercase;
+    display: inline-block;
 }
 
-/* Subtle static glitch shadows */
-.loader-psyclox::before,
-.loader-psyclox::after {
-    content: "PSYCLOX";
+.loader-saadmadni::before,
+.loader-saadmadni::after {
+    content: "SAAD MADNI";
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.9;
-}
-
-.loader-psyclox::before {
-    color: #ff007f;
-    z-index: -1;
-    transform: translate(-1px, 0px);
-    clip-path: polygon(0 20%, 100% 20%, 100% 30%, 0 30%);
-    animation: loader-glitch-1 4s infinite linear alternate-reverse;
-}
-
-.loader-psyclox::after {
-    color: #00ffff;
-    z-index: -2;
     transform: translate(1px, 0px);
     clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
     animation: loader-glitch-2 3s infinite linear alternate-reverse;
